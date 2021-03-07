@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CatFacts3</string>
+    <string name="author_msg">- User %1$s</string>
+</resources>
