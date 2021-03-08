@@ -28,15 +28,23 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         mCatFactViewModel = new ViewModelProvider(this).get(CatFactViewModel.class);
-        mCatFactViewModel.catFact.observe(this, catFactList -> {
-            adapter.setCatFacts(catFactList);
-            if(catFactList.size() >= NUM_FACTS) {
-                mRecyclerView.setVisibility(View.VISIBLE);
-                ((TextView) findViewById(R.id.tv_cat_fact_loading)).setVisibility(View.INVISIBLE);
-                mRecyclerView.setAdapter(adapter);
-            }
-        });
-        mCatFactViewModel.getCatFact(NUM_FACTS);
+        if(mCatFactViewModel.catFact.getValue().size() == 0) {
+            mCatFactViewModel.catFact.observe(this, catFactList -> {
+                adapter.setCatFacts(catFactList);
+                if (catFactList.size() >= NUM_FACTS) {
+                    displayCatFacts(adapter);
+                }
+            });
+            mCatFactViewModel.getCatFact(NUM_FACTS);
+        }
+        else {
+            adapter.setCatFacts(mCatFactViewModel.catFact.getValue());
+            displayCatFacts(adapter);
+        }
     }
-
+    void displayCatFacts(RecyclerView.Adapter adapter) {
+        mRecyclerView.setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.tv_cat_fact_loading)).setVisibility(View.INVISIBLE);
+        mRecyclerView.setAdapter(adapter);
+    }
 }

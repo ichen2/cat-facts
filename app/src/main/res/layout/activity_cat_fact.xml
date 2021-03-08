@@ -20,7 +20,7 @@
         android:id="@+id/tv_cat_fact_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="16sp"
         tools:text="By Ian"
         android:layout_gravity="center_horizontal"
         android:paddingVertical="4dp"/>
